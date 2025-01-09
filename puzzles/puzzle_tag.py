@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class PuzzleTagColor(models.TextChoices):
-    BLUE = "primary", _("blue")
+    BLUE = "primary", _("blue") # reserved for chat-role-linked tags
     GRAY = "secondary", _("gray")
     GREEN = "success", _("green")  # reserved for backsolved and freebie
     RED = "danger", _("red")  # reserved for high pri
@@ -35,55 +35,12 @@ class PuzzleTag(models.Model):
         (FREEBIE, PuzzleTagColor.GREEN),
         ("Slog", PuzzleTagColor.GRAY),
         ("Grunt work", PuzzleTagColor.GRAY),
-        # Logic puzzles
-        ("Grid logic", PuzzleTagColor.WHITE),
-        ("Non-grid logic", PuzzleTagColor.WHITE),
-        # Word puzzles
-        ("Crossword", PuzzleTagColor.BLUE),
-        ("Cryptics", PuzzleTagColor.BLUE),
-        ("Letter soup", PuzzleTagColor.BLUE),
-        ("Phonetic", PuzzleTagColor.BLUE),
-        # ID
-        ("Art ID", PuzzleTagColor.WHITE),
-        ("Image ID", PuzzleTagColor.WHITE),
-        ("Music ID", PuzzleTagColor.WHITE),
-        ("Other ID tasks", PuzzleTagColor.WHITE),
-        # Specific puzzle types
-        ("Black box", PuzzleTagColor.BLUE),
-        ("Interactive", PuzzleTagColor.BLUE),
-        ("Minipuzzles", PuzzleTagColor.BLUE),
-        ("Meta Matching", PuzzleTagColor.BLUE),
-        # Stuff my mom calls IT
-        ("Code 🐒", PuzzleTagColor.WHITE),
-        ("Digital forensics", PuzzleTagColor.WHITE),
+        # Extremely basic tag list
+        ("Logic", PuzzleTagColor.WHITE),
+        ("Cryptics", PuzzleTagColor.WHITE),
         ("Media manipulation", PuzzleTagColor.WHITE),
-        # Academic topics
-        ("Bio", PuzzleTagColor.BLUE),
-        ("Chem", PuzzleTagColor.BLUE),
-        ("Foreign languages", PuzzleTagColor.BLUE),
-        ("History/Politics/Law", PuzzleTagColor.BLUE),
-        ("Literature", PuzzleTagColor.BLUE),
-        ("Maps/Geography", PuzzleTagColor.BLUE),
-        ("Math", PuzzleTagColor.BLUE),
-        ("Physics", PuzzleTagColor.BLUE),
-        # Interests/hobbies
-        ("Anime", PuzzleTagColor.WHITE),
-        ("Board games", PuzzleTagColor.WHITE),
-        ("Movies", PuzzleTagColor.WHITE),
-        ("Music Theory", PuzzleTagColor.WHITE),
-        ("Musical/Theatre", PuzzleTagColor.WHITE),
-        ("Sports", PuzzleTagColor.WHITE),
-        ("TV", PuzzleTagColor.WHITE),
-        ("Video games", PuzzleTagColor.WHITE),
-        # In-person
-        ("MIT knowledge", PuzzleTagColor.BLUE),
-        ("Scavenger hunt/submission", PuzzleTagColor.BLUE),
-        ("Physical puzzle", PuzzleTagColor.BLUE),
-        ("Live interaction", PuzzleTagColor.BLUE),
-        ("Jigsaw", PuzzleTagColor.BLUE),
-        # Locations
-        ("On campus", LOCATION_COLOR),
-        ("Remote", LOCATION_COLOR),
+        # MITMH 
+        ("On Campus Only", LOCATION_COLOR),
     ]
 
     hunt = models.ForeignKey(
@@ -91,7 +48,7 @@ class PuzzleTag(models.Model):
     )
     name = CICharField(max_length=100)
     color = models.CharField(
-        max_length=10, choices=PuzzleTagColor.choices, default=PuzzleTagColor.BLUE
+        max_length=10, choices=PuzzleTagColor.choices, default=PuzzleTagColor.WHITE
     )
     # internal flag to know when to sync meta puzzles
     is_meta = models.BooleanField(default=False)
