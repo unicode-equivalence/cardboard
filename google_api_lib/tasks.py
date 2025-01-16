@@ -708,4 +708,5 @@ def sync_drive_permissions_for_hunt(self, hunt_id):
     # don't re-add users who have already been added
     # guardian can't handle it
     new_users = list(filter(lambda user: "hunt_access" not in get_perms(user, hunt), list(users)))
-    assign_perm("hunt_access", new_users, hunt)
+    if new_users:
+        assign_perm("hunt_access", new_users, hunt)
